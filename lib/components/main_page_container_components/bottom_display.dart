@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../pages/second_page.dart';
-import 'sub_container.dart';
 
 class BottomDisplay extends StatelessWidget {
   const BottomDisplay({this.daysPage, required this.restOfList, super.key});

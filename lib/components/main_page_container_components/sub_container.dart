@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:second_project/constants/constants.dart';
-import 'package:second_project/constants/constants.dart';
 
 class SubContainer extends StatelessWidget {
   const SubContainer({

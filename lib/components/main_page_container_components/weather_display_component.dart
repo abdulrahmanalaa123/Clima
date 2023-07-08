@@ -26,7 +26,7 @@ class WeatherDisplayComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        StatusButton(),
+        const StatusButton(),
         TextCol(
           temp: temp.toStringAsFixed(0),
           weather: weather,
