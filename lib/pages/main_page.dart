@@ -5,11 +5,11 @@ import '../components/main_page_container_components/layout_element_combination.
 import '../components/main_page_container_components/bottom_display.dart';
 import '../components/main_page_container_components/sub_container.dart';
 import 'package:intl/intl.dart';
-import 'second_page.dart';
 
 class FirstPage extends StatefulWidget {
   FirstPage({required this.weatherList, super.key});
-
+//warning: This class (or a class that this class inherits from) is marked as '@immutable', but one or more of its instance fields aren't final: FirstPage.currIndex, FirstPage.status (must_be_immutable at [second_project] lib\pages\main_page.dart:9)
+// how should it be done?
   final List<dynamic> weatherList;
   int currIndex = 0;
   //List<bool> status = List<bool>.filled(4, false);
@@ -35,7 +35,8 @@ class _FirstPageState extends State<FirstPage> {
           SizedBox(
               child: BottomDisplay(
             restOfList:
-                widget.weatherList.sublist(8, widget.weatherList.length - 1),
+                //divide from the first to the end
+                widget.weatherList.sublist(8),
           )),
           Expanded(
             flex: 3,

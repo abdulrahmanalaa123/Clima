@@ -4,6 +4,7 @@ class CustomNavBar extends StatelessWidget {
   const CustomNavBar(
       {required this.firstIcon,
       this.firstIconFunction,
+      this.firstIconSize,
       required this.secondIcon,
       required this.thirdIcon,
       required this.secondIconText,
@@ -12,6 +13,7 @@ class CustomNavBar extends StatelessWidget {
   final IconData secondIcon;
   final IconData thirdIcon;
   final String secondIconText;
+  final double? firstIconSize;
   final void Function()? firstIconFunction;
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,10 @@ class CustomNavBar extends StatelessWidget {
                     color: Colors.white30, style: BorderStyle.solid)),
             child: IconButton.outlined(
               onPressed: firstIconFunction ?? () {},
-              icon: Icon(firstIcon),
+              icon: Icon(
+                firstIcon,
+                size: firstIconSize ?? 20,
+              ),
               color: Colors.white,
             ),
           ),

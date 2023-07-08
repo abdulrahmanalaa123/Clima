@@ -11,9 +11,11 @@ class Constants {
   static int paddingTextColFlex = 3;
   static int imgColFlex = 5;
   static int imgPaddingColFlex = 5;
-  static EdgeInsetsGeometry subMargin =
+  static const EdgeInsetsGeometry subMargin =
       EdgeInsets.only(left: 8, top: 8, bottom: 8);
-  static EdgeInsetsGeometry subPadding = EdgeInsets.all(8);
+  static const EdgeInsetsGeometry subPadding = EdgeInsets.all(8);
+  static const TextStyle secondPageListStyle = TextStyle(
+      fontWeight: FontWeight.w500, color: Colors.white30, fontSize: 20);
 
   static LinearGradient gradient = LinearGradient(
     colors: [

@@ -11,7 +11,7 @@ class ContainerContents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      SizedBox(
+      const SizedBox(
         height: 8,
       ),
       const Expanded(

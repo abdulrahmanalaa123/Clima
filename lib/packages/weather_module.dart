@@ -36,6 +36,22 @@ class Weather {
       throw NoAccess();
     }
   }
+  //would've used this to provide the second page data but it isn't free acess
+  /*
+  Future<List<dynamic>> getDailyData() async {
+    http.Response response = await http.get(Uri.parse(
+        'api.openweathermap.org/data/2.5/forecast/daily?lat=$lat&lon=$lon&cnt=7&appid=$apiKey'));
+    if (response.statusCode == 200) {
+      var mapResponse = jsonDecode(response.body)['list'].toList();
+      print(mapResponse[0]);
+      List<dynamic> finale =
+          mapResponse.map((day) => WeatherState.fromJson(day)).toList();
+      return finale;
+    } else {
+      throw NoAccess();
+    }
+  }
+  */
 }
 
 class WeatherState {
