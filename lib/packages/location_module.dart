@@ -37,7 +37,6 @@ class Position {
 
   void init() async {
     _locationData = await location.getLocation();
-    print(_locationData);
     // nullability applied because of context it shouldnt be a problem since it
     //wont reach unless it pass the request service
     latitude = _locationData?.latitude;

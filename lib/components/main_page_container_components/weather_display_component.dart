@@ -9,18 +9,20 @@ class WeatherDisplayComponent extends StatelessWidget {
     required this.temp,
     required this.weather,
     required this.date,
-    required this.windspeed,
+    required this.windSpeed,
     required this.humidity,
     this.rain,
+    required this.assetPath,
     super.key,
   });
 
   final double temp;
   final String weather;
   final DateTime date;
-  final double windspeed;
+  final double windSpeed;
   final double? rain;
   final double humidity;
+  final String assetPath;
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +33,12 @@ class WeatherDisplayComponent extends StatelessWidget {
           temp: temp.toStringAsFixed(0),
           weather: weather,
           date: DateFormat('EEEE, d MMMM').format(date),
-          windSpeed: windspeed,
+          windSpeed: windSpeed,
           rainProb: rain ?? 0.2,
           humidity: humidity,
         ),
         ImageBox(
-          imgPath: 'assets/images/sunny.png',
+          imgPath: assetPath,
         ),
       ],
     );

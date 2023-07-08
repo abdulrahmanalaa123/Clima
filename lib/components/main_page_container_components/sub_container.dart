@@ -6,11 +6,13 @@ class SubContainer extends StatelessWidget {
     required this.active,
     required this.temp,
     required this.currentHour,
+    required this.assetPath,
     super.key,
   });
   final bool active;
   final String temp;
   final String currentHour;
+  final String assetPath;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +33,7 @@ class SubContainer extends StatelessWidget {
               flex: 2,
               child: SizedBox(
                 child: Image(
-                  image: AssetImage('assets/images/sunny_2d.png'),
+                  image: AssetImage(assetPath),
                   fit: BoxFit.fill,
                 ),
               ),

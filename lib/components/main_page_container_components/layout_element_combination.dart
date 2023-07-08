@@ -27,8 +27,9 @@ class ContainerContents extends StatelessWidget {
             temp: weatherObj.avgtemp,
             weather: weatherObj.weather,
             date: weatherObj.dateTime,
-            windspeed: weatherObj.windspeed,
+            windSpeed: weatherObj.windspeed,
             humidity: weatherObj.humidity.toDouble(),
+            assetPath: weatherObj.assetPath,
           )),
     ]);
   }

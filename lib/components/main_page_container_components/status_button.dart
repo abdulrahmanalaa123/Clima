@@ -11,7 +11,7 @@ class StatusButton extends StatelessWidget {
       ),
       Expanded(
         child: Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             border: Border.all(color: Colors.white30, width: 1),

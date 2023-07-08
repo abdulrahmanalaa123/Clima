@@ -23,7 +23,7 @@ class TextCol extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Expanded(flex: Constants.paddingTextColFlex, child: SizedBox()),
+        Expanded(flex: Constants.paddingTextColFlex, child: const SizedBox()),
         Expanded(
           flex: Constants.textColFlex,
           child: SizedBox(

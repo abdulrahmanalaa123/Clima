@@ -26,7 +26,7 @@ class RestDaysPage extends StatelessWidget {
                         //done at length of 4 to find the middle of the next day as the average min max in the day
                         //not efficient but fuck the weather its not the main focus
                         weatherStateObject: dailyWeatherList[4]))),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Expanded(
@@ -47,7 +47,9 @@ class RestDaysPage extends StatelessWidget {
                                     .format(weatherObj.dateTime),
                                 weather: weatherObj.weather,
                                 maxTemp: weatherObj.tempMax.toStringAsFixed(0),
-                                minTemp: weatherObj.tempMin.toStringAsFixed(0))
+                                minTemp: weatherObj.tempMin.toStringAsFixed(0),
+                                assetPath: weatherObj.assetPath,
+                              )
                             : const SizedBox.shrink();
                       }),
                 ))
@@ -109,7 +111,7 @@ class SecondContainerElements extends StatelessWidget {
             children: [
               Expanded(
                   child: Image(
-                image: AssetImage('assets/images/sunny.png'),
+                image: AssetImage(weatherStateObject.assetPath),
                 fit: BoxFit.contain,
               )),
               Expanded(
@@ -223,12 +225,13 @@ class ViewingElement extends StatelessWidget {
       required this.weather,
       required this.maxTemp,
       required this.minTemp,
+      required this.assetPath,
       super.key});
   final String weekday;
   final String weather;
   final String maxTemp;
   final String minTemp;
-
+  final String assetPath;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -249,7 +252,7 @@ class ViewingElement extends StatelessWidget {
                     child: SizedBox(
                       child: Image(
                         image: AssetImage(
-                          'assets/images/rainy_2d.png',
+                          assetPath,
                         ),
                         fit: BoxFit.contain,
                       ),

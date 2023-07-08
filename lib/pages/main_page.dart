@@ -63,6 +63,7 @@ class _FirstPageState extends State<FirstPage> {
                       currentHour:
                           DateFormat('HH:mm').format(weatherObj.dateTime),
                       active: widget.status[index],
+                      assetPath: weatherObj.assetPath,
                     ));
               },
             ),

@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'weather_errors.dart';
+import '../constants/constants.dart';
 
 const String apiKey = 'ec7017fcfb8fd3c151ff2dc0d296a4f6';
 
@@ -14,7 +15,7 @@ class Weather {
         'https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$lon&appid=$apiKey'));
     if (response.statusCode == 200) {
       var mapResponse = jsonDecode(response.body)['list'].toList();
-      print(mapResponse[0]);
+
       List<dynamic> finale =
           mapResponse.map((hour) => WeatherState.fromJson(hour)).toList();
       return finale;
@@ -28,7 +29,6 @@ class Weather {
         'api.openweathermap.org/data/2.5/forecast?q=$city&appid=$apiKey'));
     if (response.statusCode == 200) {
       var mapResponse = jsonDecode(response.body)['list'].toList();
-      print(mapResponse[0]);
       List<dynamic> finale =
           mapResponse.map((hour) => WeatherState.fromJson(hour)).toList();
       return finale;
@@ -65,7 +65,7 @@ class WeatherState {
   final String? icon;
   final double windspeed;
   final double? rainProb;
-
+  final String assetPath;
   const WeatherState({
     required this.avgtemp,
     required this.tempMin,
@@ -77,6 +77,7 @@ class WeatherState {
     this.icon,
     required this.windspeed,
     this.rainProb,
+    required this.assetPath,
   });
 
   factory WeatherState.fromJson(Map<dynamic, dynamic> json) {
@@ -94,6 +95,8 @@ class WeatherState {
       //but just to hold it right now till its solved i can use two varaibles to solve it but too lazy
       rainProb: json['rain'] ?? 0.0,
       dateTime: DateTime.parse(json['dt_txt']),
+      assetPath: Constants.dayAssetsMap[json['weather'][0]['main']] ??
+          'assets/images/Rainy.png',
     );
   }
 }

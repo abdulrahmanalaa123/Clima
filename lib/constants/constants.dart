@@ -9,7 +9,7 @@ class Constants {
   static const glowColor = Color(0xFF00A1FF);
   static int textColFlex = 4;
   static int paddingTextColFlex = 3;
-  static int imgColFlex = 5;
+  static int imgColFlex = 4;
   static int imgPaddingColFlex = 5;
   static const EdgeInsetsGeometry subMargin =
       EdgeInsets.only(left: 8, top: 8, bottom: 8);
@@ -56,7 +56,7 @@ class Constants {
                   BoxShadow(
                     color: shadowColor,
                     blurRadius: 0,
-                    offset: Offset(10, 20).scale(0, 1),
+                    offset: const Offset(10, 20).scale(0, 1),
                     spreadRadius: -10,
                   ),
                 ]
@@ -66,4 +66,23 @@ class Constants {
           : null,
     );
   }
+
+  static Map<String, String> dayAssetsMap = {
+    'Thunderstorm': 'assets/images/Thunderstorm.png',
+    'Clear': 'assets/images/Clear.png',
+    'Clouds': 'assets/images/Rain.png',
+    'Tornado': 'assets/images/Tornado.png',
+    'Drizzle': 'assets/images/Rain.png',
+    'Rain': 'assets/images/Rain.png',
+    'Snow': 'assets/images/Snow.png',
+  };
+  static Map<String, String> nightAssetsMap = {
+    'Thunderstorm': 'assets/images/ThunderstormSub.png',
+    'Clear': 'assets/images/Clear.png',
+    'Clouds': 'assets/images/Clouds.png',
+    'Tornado': 'assets/images/Tornado.png',
+    'Drizzle': 'assets/images/Tornado.png',
+    'Rain': 'assets/images/Rain.png',
+    'Snow': 'assets/images/Snow.png',
+  };
 }
