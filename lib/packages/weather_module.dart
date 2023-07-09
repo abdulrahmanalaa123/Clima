@@ -99,4 +99,14 @@ class WeatherState {
           'assets/images/Rainy.png',
     );
   }
+
+  String determineType(String weather, int Id) {
+    var maxId = Constants.maxIds[weather] ?? 20;
+
+    if (Id % 100 <= maxId ~/ 2) {
+      return '$weather 1';
+    } else {
+      return '$weather 2';
+    }
+  }
 }

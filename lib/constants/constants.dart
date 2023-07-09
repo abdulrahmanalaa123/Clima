@@ -67,10 +67,18 @@ class Constants {
     );
   }
 
+  static const Map<String, int> maxIds = {
+    'Thunderstorm': 32,
+    'Drizzle': 21,
+    'Rain': 31,
+    'Snow': 22,
+    'Clear': 0,
+    'Clouds': 4,
+  };
   static Map<String, String> dayAssetsMap = {
     'Thunderstorm': 'assets/images/Thunderstorm.png',
     'Clear': 'assets/images/Clear.png',
-    'Clouds': 'assets/images/Rain.png',
+    'Clouds': 'assets/images/Clouds.png',
     'Tornado': 'assets/images/Tornado.png',
     'Drizzle': 'assets/images/Rain.png',
     'Rain': 'assets/images/Rain.png',
