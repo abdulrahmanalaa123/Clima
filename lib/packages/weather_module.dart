@@ -95,8 +95,10 @@ class WeatherState {
       //but just to hold it right now till its solved i can use two varaibles to solve it but too lazy
       rainProb: json['rain'] ?? 0.0,
       dateTime: DateTime.parse(json['dt_txt']),
-      assetPath: Constants.dayAssetsMap[json['weather'][0]['main']] ??
-          'assets/images/Rainy.png',
+      assetPath: (determineDay(json['dt_txt'])
+              ? Constants.dayAssetsMap[json['weather'][0]['main']]
+              : Constants.nightAssetsMap[json['weather'][0]['main']]) ??
+          'assets/images/snow.png',
     );
   }
 
@@ -107,6 +109,16 @@ class WeatherState {
       return '$weather 1';
     } else {
       return '$weather 2';
+    }
+  }
+
+  static bool determineDay(String date) {
+    var parsedHour = DateTime.parse(date).hour;
+
+    if (parsedHour > 22 && parsedHour < 6) {
+      return false;
+    } else {
+      return true;
     }
   }
 }
