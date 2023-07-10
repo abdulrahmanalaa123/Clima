@@ -96,13 +96,15 @@ class WeatherState {
       rainProb: json['rain'] ?? 0.0,
       dateTime: DateTime.parse(json['dt_txt']),
       assetPath: (determineDay(json['dt_txt'])
-              ? Constants.dayAssetsMap[json['weather'][0]['main']]
-              : Constants.nightAssetsMap[json['weather'][0]['main']]) ??
+              ? Constants.dayAssetsMap[determineType(
+                  json['weather'][0]['main'], json['weather'][0]['id'])]
+              : Constants.nightAssetsMap[determineType(
+                  json['weather'][0]['main'], json['weather'][0]['id'])]) ??
           'assets/images/snow.png',
     );
   }
 
-  String determineType(String weather, int Id) {
+  static String determineType(String weather, int Id) {
     var maxId = Constants.maxIds[weather] ?? 20;
 
     if (Id % 100 <= maxId ~/ 2) {
