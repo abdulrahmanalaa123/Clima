@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 
 class BaseAnimatedScreen extends StatelessWidget {
   BaseAnimatedScreen({super.key});
-  Position pos = Position();
+  final Position pos = Position();
   @override
   Widget build(BuildContext context) {
     try {
@@ -43,7 +43,7 @@ class BaseAnimatedScreen extends StatelessWidget {
 
   Future<List<dynamic>> initializeAccess() async {
     await pos.requestLocationService();
-    await pos.requestLocationService();
+    await pos.requestPermissionLocation();
     await pos.init();
     Future<List<dynamic>> list3Hour =
         Weather(pos.latitude, pos.longitude).getData();
