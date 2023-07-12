@@ -41,7 +41,7 @@ class RestDaysPage extends StatelessWidget {
                         //didnt use list tile because the effort i would spend customizing it would take much longer than just doing a row
                         //as well in the page before in using the already set container properties
                         //could've changed the count to be constant and just adjust the index values like done in the currIndex in the past page
-                        return index % 4 == 0
+                        return index % 3 == 0
                             ? ViewingElement(
                                 weekday: DateFormat('EEE')
                                     .format(weatherObj.dateTime),

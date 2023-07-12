@@ -10,7 +10,7 @@ class Constants {
   static int textColFlex = 4;
   static int paddingTextColFlex = 3;
   static int imgColFlex = 4;
-  static int imgPaddingColFlex = 5;
+  static int imgPaddingColFlex = 6;
   static const EdgeInsetsGeometry subMargin =
       EdgeInsets.only(left: 8, top: 8, bottom: 8);
   static const EdgeInsetsGeometry subPadding = EdgeInsets.all(8);

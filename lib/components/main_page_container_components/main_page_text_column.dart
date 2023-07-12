@@ -1,7 +1,6 @@
 import 'package:flutter_glow/flutter_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:second_project/constants/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'weather_details_component.dart';
 
 class TextCol extends StatelessWidget {

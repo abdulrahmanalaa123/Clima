@@ -16,6 +16,10 @@ class SubContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        constraints: const BoxConstraints(
+          minWidth: 80,
+          maxWidth: 80,
+        ),
         decoration:
             Constants.buildBoxDecoration(false, false, active).copyWith(),
         margin: Constants.subMargin,
@@ -34,7 +38,7 @@ class SubContainer extends StatelessWidget {
               child: SizedBox(
                 child: Image(
                   image: AssetImage(assetPath),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),

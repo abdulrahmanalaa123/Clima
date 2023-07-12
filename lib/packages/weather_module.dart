@@ -13,29 +13,22 @@ class Weather {
   Future<List<dynamic>> getData() async {
     http.Response response = await http.get(Uri.parse(
         'https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$lon&appid=$apiKey'));
+
+    await Future.delayed(
+      const Duration(milliseconds: 500),
+    );
     if (response.statusCode == 200) {
       var mapResponse = jsonDecode(response.body)['list'].toList();
 
       List<dynamic> finale =
           mapResponse.map((hour) => WeatherState.fromJson(hour)).toList();
+
       return finale;
     } else {
       throw NoAccess();
     }
   }
 
-  Future<List<dynamic>> getCityData(String city) async {
-    http.Response response = await http.get(Uri.parse(
-        'api.openweathermap.org/data/2.5/forecast?q=$city&appid=$apiKey'));
-    if (response.statusCode == 200) {
-      var mapResponse = jsonDecode(response.body)['list'].toList();
-      List<dynamic> finale =
-          mapResponse.map((hour) => WeatherState.fromJson(hour)).toList();
-      return finale;
-    } else {
-      throw NoAccess();
-    }
-  }
   //would've used this to provide the second page data but it isn't free acess
   /*
   Future<List<dynamic>> getDailyData() async {
@@ -93,34 +86,34 @@ class WeatherState {
       windspeed: json['wind']['speed'].toDouble(),
       //if json['rain'] is null just set the probability with 0 and its supposed to return a map of string dynamic
       //but just to hold it right now till its solved i can use two varaibles to solve it but too lazy
-      rainProb: json['rain'] ?? 0.0,
+      rainProb: json.containsKey('rain') ? json['rain']['3h'] : 0.2,
       dateTime: DateTime.parse(json['dt_txt']),
-      assetPath: (determineDay(json['dt_txt'])
-              ? Constants.dayAssetsMap[determineType(
+      assetPath: (_determineDay(json['dt_txt'])
+              ? Constants.dayAssetsMap[_determineType(
                   json['weather'][0]['main'], json['weather'][0]['id'])]
-              : Constants.nightAssetsMap[determineType(
+              : Constants.nightAssetsMap[_determineType(
                   json['weather'][0]['main'], json['weather'][0]['id'])]) ??
           'assets/images/snow.png',
     );
   }
 
-  static String determineType(String weather, int Id) {
+  static String _determineType(String weather, int id) {
     var maxId = Constants.maxIds[weather] ?? 20;
 
-    if (Id % 100 <= maxId ~/ 2) {
+    if (id % 100 <= maxId ~/ 2) {
       return '$weather 1';
     } else {
       return '$weather 2';
     }
   }
 
-  static bool determineDay(String date) {
+  static bool _determineDay(String date) {
     var parsedHour = DateTime.parse(date).hour;
 
-    if (parsedHour > 22 && parsedHour < 6) {
-      return false;
-    } else {
+    if (parsedHour >= 6 && parsedHour <= 18) {
       return true;
+    } else {
+      return false;
     }
   }
 }
