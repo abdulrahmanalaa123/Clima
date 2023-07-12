@@ -16,24 +16,46 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
-      home: MyHomePage(),
+      home: BaseAnimatedScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
+class BaseAnimatedScreen extends StatelessWidget {
+  BaseAnimatedScreen({super.key});
+  Position pos = Position();
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  Widget build(BuildContext context) {
+    try {
+      pos.requestAccess();
+      Future<List<dynamic>> list3Hour =
+          Weather(pos.latitude, pos.longitude).getData();
+
+      return AnimatedScreen(
+        futureData: list3Hour,
+        errorText: 'Check your Internet Connection or Access to location',
+      );
+    } catch (e) {
+      return const MainTextQueryPage();
+    }
+  }
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class MainTextQueryPage extends StatefulWidget {
+  const MainTextQueryPage({super.key});
+
+  @override
+  State<MainTextQueryPage> createState() => _MainTextQueryPageState();
+}
+
+class _MainTextQueryPageState extends State<MainTextQueryPage> {
   final myController = TextEditingController();
   late List<dynamic> currentQueryList;
   int chosenQuery = 0;
+  //it is reinitialized because it wont reach this unless there happens a problem
+  //and the user needs to reinitialize a position
   Position pos = Position();
 
   @override
@@ -50,13 +72,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    try {
-      pos.requestAccess();
-      pos.init();
-    } catch (e) {
-      Navigator.of(context).pop;
-      SystemNavigator.pop();
-    }
     return Scaffold(
       backgroundColor: Constants.primaryThemeColor,
       body: Column(
@@ -111,14 +126,23 @@ class _MyHomePageState extends State<MyHomePage> {
           Center(
             child: TextButton(
               onPressed: (() {
-                Future<List<dynamic>> daily3HourList =
-                    Weather(pos.latitude, pos.longitude).getData();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Displayer(
-                              futuredata: daily3HourList,
-                            )));
+                try {
+                  pos.requestAccess();
+                  pos.init();
+                  Future<List<dynamic>> daily3HourList =
+                      Weather(pos.latitude, pos.longitude).getData();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AnimatedScreen(
+                                futureData: daily3HourList,
+                                errorText:
+                                    'Check your Internet Connection or Access to location',
+                              )));
+                } catch (e) {
+                  Navigator.of(context).pop;
+                  SystemNavigator.pop();
+                }
               }),
               style: TextButton.styleFrom(backgroundColor: Colors.blue),
               child: const Text(
@@ -224,8 +248,9 @@ class CustomSearchBar extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Displayer(
-                              futuredata: daily3HourList,
+                        builder: (context) => AnimatedScreen(
+                              futureData: daily3HourList,
+                              errorText: 'Check your Internet Connection ',
                             )));
               },
               icon: const Icon(Icons.arrow_circle_right_rounded),
@@ -265,8 +290,9 @@ class ListObject extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Displayer(
-                            futuredata: daily3HourList,
+                      builder: (context) => AnimatedScreen(
+                            futureData: daily3HourList,
+                            errorText: 'Check your Internet Connection',
                           )));
             },
             child: Container(
@@ -299,14 +325,16 @@ class ListObject extends StatelessWidget {
   }
 }
 
-class Displayer extends StatelessWidget {
-  const Displayer({required this.futuredata, super.key});
+class AnimatedScreen extends StatelessWidget {
+  const AnimatedScreen(
+      {required this.futureData, required this.errorText, super.key});
 
-  final Future<List<dynamic>> futuredata;
+  final Future<List<dynamic>> futureData;
+  final String errorText;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<dynamic>>(
-        future: futuredata,
+        future: futureData,
         builder: (BuildContext context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Scaffold(
@@ -321,24 +349,24 @@ class Displayer extends StatelessWidget {
             );
           } else if (snapshot.hasError) {
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              ErrorBox(context);
+              print(snapshot.error);
+              ErrorBox(context, errorText);
             });
-            return const MyHomePage();
+            return const MainTextQueryPage();
           } else {
             return FirstPage(weatherList: snapshot.data ?? []);
           }
         });
   }
 
-  Future<dynamic> ErrorBox(BuildContext context) async {
+  Future<dynamic> ErrorBox(BuildContext context, String errorText) async {
     await Future.delayed(const Duration(microseconds: 4));
     return showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text(
-              'Check your Internet Connection or Acces to loc  ation'),
-          content: const Text('Retry calling the Service'),
+          title: Text(errorText),
+          content: const Text('Please retry calling the service'),
           actions: [
             ElevatedButton(
                 onPressed: () {

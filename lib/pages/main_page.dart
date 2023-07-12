@@ -7,11 +7,12 @@ import '../components/main_page_container_components/sub_container.dart';
 import 'package:intl/intl.dart';
 
 class FirstPage extends StatefulWidget {
-  FirstPage({required this.weatherList, super.key});
+  FirstPage({required this.weatherList, this.cityName, super.key});
 //warning: This class (or a class that this class inherits from) is marked as '@immutable', but one or more of its instance fields aren't final: FirstPage.currIndex, FirstPage.status (must_be_immutable at [second_project] lib\pages\main_page.dart:9)
 // how should it be done?
   final List<dynamic> weatherList;
   int currIndex = 0;
+  final String? cityName;
   //List<bool> status = List<bool>.filled(4, false);
   List<bool> status = [true, false, false, false];
   @override
@@ -29,7 +30,9 @@ class _FirstPageState extends State<FirstPage> {
             flex: 12,
             child: MainContainer(
               childObj: ContainerContents(
-                  weatherObj: widget.weatherList[widget.currIndex]),
+                weatherObj: widget.weatherList[widget.currIndex],
+                cityName: widget.cityName,
+              ),
             ),
           ),
           SizedBox(

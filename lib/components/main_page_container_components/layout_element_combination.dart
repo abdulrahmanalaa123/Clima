@@ -4,22 +4,22 @@ import 'custom_nav_bar.dart';
 import 'weather_display_component.dart';
 
 class ContainerContents extends StatelessWidget {
-  const ContainerContents({required this.weatherObj, super.key});
+  const ContainerContents({required this.weatherObj, this.cityName, super.key});
 
   final dynamic weatherObj;
-
+  final String? cityName;
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       const SizedBox(
         height: 8,
       ),
-      const Expanded(
+      Expanded(
           child: CustomNavBar(
         firstIcon: CupertinoIcons.square_grid_2x2,
         secondIcon: CupertinoIcons.map_pin_ellipse,
         thirdIcon: Icons.more_vert,
-        secondIconText: 'Alexandria, Egypt',
+        secondIconText: cityName ?? 'Alexandria, Egypt',
       )),
       Expanded(
           flex: 9,
