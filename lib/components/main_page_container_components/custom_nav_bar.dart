@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_project/main.dart';
 
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar(
@@ -28,7 +29,13 @@ class CustomNavBar extends StatelessWidget {
                 border: Border.all(
                     color: Colors.white30, style: BorderStyle.solid)),
             child: IconButton.outlined(
-              onPressed: firstIconFunction ?? () {},
+              onPressed: firstIconFunction ??
+                  () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MainTextQueryPage()));
+                  },
               icon: Icon(
                 firstIcon,
                 size: firstIconSize ?? 20,
