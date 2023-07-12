@@ -22,9 +22,10 @@ class Weather {
 
       List<dynamic> finale =
           mapResponse.map((hour) => WeatherState.fromJson(hour)).toList();
-
       return finale;
     } else {
+      print(response.statusCode);
+
       throw NoAccess();
     }
   }

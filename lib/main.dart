@@ -29,9 +29,7 @@ class BaseAnimatedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     try {
-      pos.requestAccess();
-      Future<List<dynamic>> list3Hour =
-          Weather(pos.latitude, pos.longitude).getData();
+      Future<List<dynamic>> list3Hour = initializeAccess();
 
       return AnimatedScreen(
         futureData: list3Hour,
@@ -40,6 +38,15 @@ class BaseAnimatedScreen extends StatelessWidget {
     } catch (e) {
       return const MainTextQueryPage();
     }
+  }
+
+  Future<List<dynamic>> initializeAccess() async {
+    await pos.requestLocationService();
+    await pos.requestLocationService();
+    await pos.init();
+    Future<List<dynamic>> list3Hour =
+        Weather(pos.latitude, pos.longitude).getData();
+    return list3Hour;
   }
 }
 
@@ -127,10 +134,7 @@ class _MainTextQueryPageState extends State<MainTextQueryPage> {
             child: TextButton(
               onPressed: (() {
                 try {
-                  pos.requestAccess();
-                  pos.init();
-                  Future<List<dynamic>> daily3HourList =
-                      Weather(pos.latitude, pos.longitude).getData();
+                  Future<List<dynamic>> daily3HourList = requestLocation();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -157,6 +161,16 @@ class _MainTextQueryPageState extends State<MainTextQueryPage> {
         ],
       ),
     );
+  }
+
+  Future<List<dynamic>> requestLocation() async {
+    await pos.requestLocationService();
+    await pos.requestLocationService();
+    await pos.init();
+    pos.init();
+    Future<List<dynamic>> daily3HourList =
+        Weather(pos.latitude, pos.longitude).getData();
+    return daily3HourList;
   }
 
   void _getListQuery(text) async {
@@ -337,16 +351,7 @@ class AnimatedScreen extends StatelessWidget {
         future: futureData,
         builder: (BuildContext context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Scaffold(
-              backgroundColor: Constants.primaryThemeColor,
-              body: Center(
-                child: Image(
-                  image: AssetImage('assets/loading.gif'),
-                  height: 200,
-                  width: 200,
-                ),
-              ),
-            );
+            return AnimationComponent();
           } else if (snapshot.hasError) {
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               print(snapshot.error);
@@ -376,6 +381,26 @@ class AnimatedScreen extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+}
+
+class AnimationComponent extends StatelessWidget {
+  const AnimationComponent({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      backgroundColor: Constants.primaryThemeColor,
+      body: Center(
+        child: Image(
+          image: AssetImage('assets/loading.gif'),
+          height: 200,
+          width: 200,
+        ),
+      ),
     );
   }
 }
