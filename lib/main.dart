@@ -166,7 +166,7 @@ class _MainTextQueryPageState extends State<MainTextQueryPage> {
 
   Future<List<dynamic>> requestLocation() async {
     await pos.requestLocationService();
-    await pos.requestLocationService();
+    await pos.requestPermissionLocation();
     await pos.init();
     pos.init();
     Future<List<dynamic>> daily3HourList =
@@ -312,6 +312,8 @@ class ListObject extends StatelessWidget {
             },
             child: Container(
               margin: const EdgeInsets.all(16),
+              width: 100,
+              height: 50,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   border: Border.all(color: Constants.glowColor, width: 2),
@@ -325,7 +327,6 @@ class ListObject extends StatelessWidget {
                   ]),
               child: ListTile(
                 enabled: true,
-                contentPadding: const EdgeInsets.all(16),
                 leading: Text(
                   currentQuery[index].toString(),
                   style: const TextStyle(
