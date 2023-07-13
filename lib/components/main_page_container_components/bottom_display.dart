@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../pages/second_page.dart';
+import '../../pages/remaining_4_days.dart';
 
 class BottomDisplay extends StatelessWidget {
   const BottomDisplay({this.daysPage, required this.restOfList, super.key});
