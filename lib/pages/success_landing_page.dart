@@ -6,20 +6,23 @@ import '../components/main_page_container_components/bottom_display.dart';
 import '../components/main_page_container_components/sub_container.dart';
 import 'package:intl/intl.dart';
 
-class FirstPage extends StatefulWidget {
-  FirstPage({required this.weatherList, this.cityName, super.key});
-//warning: This class (or a class that this class inherits from) is marked as '@immutable', but one or more of its instance fields aren't final: FirstPage.currIndex, FirstPage.status (must_be_immutable at [second_project] lib\pages\main_page.dart:9)
+class TodayWeatherPage extends StatefulWidget {
+  const TodayWeatherPage({required this.weatherList, this.cityName, super.key});
+//warning: This class (or a class that this class inherits from) is marked as '@immutable', but one or more of its instance fields aren't final: FirstPage.currIndex, FirstPage.status (must_be_immutable at [second_project] lib\pages\success_landing_page.dart:9)
 // how should it be done?
+  //it was because you shouldnt put a non final value in the initialization of a stateful widget
   final List<dynamic> weatherList;
-  int currIndex = 0;
   final String? cityName;
-  //List<bool> status = List<bool>.filled(4, false);
-  List<bool> status = [true, false, false, false];
   @override
-  State<FirstPage> createState() => _FirstPageState();
+  State<TodayWeatherPage> createState() => _TodayWeatherPageState();
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _TodayWeatherPageState extends State<TodayWeatherPage> {
+  int currIndex = 0;
+  //List<bool> status = List<bool>.filled(4, false);
+
+  List<bool> status = [true, false, false, false];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,8 +32,8 @@ class _FirstPageState extends State<FirstPage> {
           Expanded(
             flex: 12,
             child: MainContainer(
-              childObj: ContainerContents(
-                weatherObj: widget.weatherList[widget.currIndex],
+              childObj: WeatherCardLayout(
+                weatherObj: widget.weatherList[currIndex],
                 cityName: widget.cityName,
               ),
             ),
@@ -54,18 +57,18 @@ class _FirstPageState extends State<FirstPage> {
                     onTap: () {
                       setState(() {
                         //to get the staus of the current skipped timestamp
-                        widget.status[widget.currIndex ~/ 2] = false;
+                        status[currIndex ~/ 2] = false;
                         //make the current element light up and cant turn off except by selecting another
-                        widget.status[index] = true;
+                        status[index] = true;
                         //to divide the day into 4 timeStamps
-                        widget.currIndex = 2 * index;
+                        currIndex = 2 * index;
                       });
                     },
-                    child: SubContainer(
+                    child: TodayHourlyCards(
                       temp: weatherObj.avgtemp.toStringAsFixed(0),
                       currentHour:
                           DateFormat('HH:mm').format(weatherObj.dateTime),
-                      active: widget.status[index],
+                      active: status[index],
                       assetPath: weatherObj.assetPath,
                     ));
               },

@@ -4,8 +4,8 @@ import 'main_page_text_column.dart';
 import 'package:second_project/constants/constants.dart';
 import 'package:intl/intl.dart';
 
-class WeatherDisplayComponent extends StatelessWidget {
-  const WeatherDisplayComponent({
+class WeatherCardDisplay extends StatelessWidget {
+  const WeatherCardDisplay({
     required this.temp,
     required this.weather,
     required this.date,
@@ -29,7 +29,7 @@ class WeatherDisplayComponent extends StatelessWidget {
     return Stack(
       children: [
         const StatusButton(),
-        TextCol(
+        WeatherTextDetails(
           temp: temp.toStringAsFixed(0),
           weather: weather,
           date: DateFormat('EEEE, d MMMM').format(date),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:second_project/main.dart';
+import '../../pages/failure_landing_page.dart';
 
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar(
@@ -31,10 +31,11 @@ class CustomNavBar extends StatelessWidget {
             child: IconButton.outlined(
               onPressed: firstIconFunction ??
                   () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MainTextQueryPage()));
+                            builder: (context) =>
+                                const SearchInitializationPage()));
                   },
               icon: Icon(
                 firstIcon,

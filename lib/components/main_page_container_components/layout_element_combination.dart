@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'custom_nav_bar.dart';
 import 'weather_display_component.dart';
 
-class ContainerContents extends StatelessWidget {
-  const ContainerContents({required this.weatherObj, this.cityName, super.key});
+class WeatherCardLayout extends StatelessWidget {
+  const WeatherCardLayout({required this.weatherObj, this.cityName, super.key});
 
   final dynamic weatherObj;
   final String? cityName;
@@ -23,7 +23,7 @@ class ContainerContents extends StatelessWidget {
       )),
       Expanded(
           flex: 9,
-          child: WeatherDisplayComponent(
+          child: WeatherCardDisplay(
             temp: weatherObj.avgtemp,
             weather: weatherObj.weather,
             date: weatherObj.dateTime,

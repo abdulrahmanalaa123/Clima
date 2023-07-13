@@ -29,7 +29,7 @@ class BottomDisplay extends StatelessWidget {
             child: const Row(
               children: [
                 Text(
-                  '7 days',
+                  '4 days',
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: Colors.white30,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:second_project/constants/constants.dart';
 
-class SubContainer extends StatelessWidget {
-  const SubContainer({
+class TodayHourlyCards extends StatelessWidget {
+  const TodayHourlyCards({
     required this.active,
     required this.temp,
     required this.currentHour,

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:second_project/constants/constants.dart';
 import 'weather_details_component.dart';
 
-class TextCol extends StatelessWidget {
-  const TextCol(
+class WeatherTextDetails extends StatelessWidget {
+  const WeatherTextDetails(
       {required this.temp,
       required this.weather,
       required this.date,
@@ -55,7 +55,7 @@ class TextCol extends StatelessWidget {
                   indent: 50,
                   endIndent: 50,
                 ),
-                ExtraWeather(
+                ExtraWeatherDetails(
                   windSpeed: windSpeed,
                   humidity: humidity,
                   rainProb: rainProb ?? 0,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
-class ExtraWeather extends StatelessWidget {
-  const ExtraWeather(
+class ExtraWeatherDetails extends StatelessWidget {
+  const ExtraWeatherDetails(
       {required this.windSpeed,
       required this.humidity,
       required this.rainProb,
