@@ -31,11 +31,12 @@ class CustomNavBar extends StatelessWidget {
             child: IconButton.outlined(
               onPressed: firstIconFunction ??
                   () {
-                    Navigator.pushReplacement(
+                    Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                const SearchInitializationPage()));
+                                const SearchInitializationPage()),
+                        (Route<dynamic> route) => false);
                   },
               icon: Icon(
                 firstIcon,
